@@ -1,0 +1,135 @@
+Sure, I'll provide answers to the questions in the image based on real-time experience for an interview.
+
+Some basic commands of Git?
+
+Answer:
+git init: Initialize a new Git repository.
+git clone [url]: Clone an existing repository from a URL.
+git status: Check the status of the working directory and staging area.
+git add [file]: Add a file to the staging area.
+git commit -m "message": Commit changes in the staging area with a message.
+git push: Push local changes to a remote repository.
+git pull: Fetch and merge changes from a remote repository.
+git branch: List, create, or delete branches.
+git checkout [branch]: Switch to a different branch.
+git merge [branch]: Merge a branch into the current branch.
+Can you tell me how exactly you have integrated your source control tool with CI tools and how does this integration happen?
+
+Answer:
+Integration Example with Jenkins and Git:
+Setup Webhooks: Configure webhooks in the Git repository settings to trigger Jenkins jobs on code commits or pull requests.
+Jenkins Job Configuration: In Jenkins, create a new job and configure it to use the Git repository URL.
+Poll SCM: Optionally, configure Jenkins to poll the Git repository periodically if webhooks are not available.
+Build Triggers: Set up build triggers to start Jenkins jobs based on specific Git events.
+Credentials: Add necessary credentials for accessing the Git repository securely.
+How does exactly Jenkins get triggered? How that triggering mechanism is configured?
+
+Answer:
+Jenkins triggers can be configured in several ways:
+Webhooks: Set up webhooks in the Git repository to notify Jenkins of changes.
+Poll SCM: Configure Jenkins to poll the SCM at regular intervals.
+Manual Trigger: Start the Jenkins job manually through the Jenkins UI.
+Pipeline Script: Define triggers in the Jenkins Pipeline script using triggers {} block.
+Have you written Declarative Pipelines?
+
+Answer:
+Yes, I have written Declarative Pipelines. They are defined using the pipeline {} block in a Jenkinsfile. Declarative syntax provides a more structured way of defining the pipeline with stages, steps, and post actions.
+How this pulling of your source code can be configured as a part of a Declarative Pipeline?
+
+Answer:
+In a Declarative Pipeline, pulling the source code is typically done in the agent block or the stages block:
+groovy
+Copy code
+pipeline {
+    agent any
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'https://github.com/your-repo.git']]])
+            }
+        }
+        // Other stages
+    }
+}
+What is agent any means?
+
+Answer:
+agent any specifies that the pipeline can run on any available Jenkins agent/node. This provides flexibility for the job to be executed on any configured agent within Jenkins.
+If I want to run my agent in a specific agent, how can I do that?
+
+Answer:
+You can specify a particular agent using the label keyword:
+groovy
+Copy code
+pipeline {
+    agent {
+        label 'specific-agent-label'
+    }
+    stages {
+        // Define stages here
+    }
+}
+How do you use passwords in this Declarative Pipeline?
+
+Answer:
+Use Jenkins credentials binding to handle passwords securely:
+groovy
+Copy code
+pipeline {
+    agent any
+    environment {
+        MY_SECRET = credentials('my-secret-id')
+    }
+    stages {
+        stage('Use Secret') {
+            steps {
+                sh 'echo $MY_SECRET'
+            }
+        }
+    }
+}
+Have you set up Jenkins yourself?
+
+Answer:
+Yes, I have set up Jenkins servers, including installing Jenkins on various platforms, configuring security (users and roles), setting up plugins, and integrating with other tools like Git, Docker, and Kubernetes.
+If I want to run a job from a Docker container, can we do that?
+
+Answer:
+Yes, you can run Jenkins jobs within Docker containers using the Docker Pipeline plugin. You define the container in the Jenkins Pipeline script:
+groovy
+Copy code
+pipeline {
+    agent {
+        docker {
+            image 'maven:3.6.3-jdk-8'
+            args '-v /root/.m2:/root/.m2'
+        }
+    }
+    stages {
+        stage('Build') {
+            steps {
+                sh 'mvn clean install'
+            }
+        }
+    }
+}
+What are the plugins you have been used in Jenkins?
+
+Answer:
+Some of the commonly used Jenkins plugins include:
+Git Plugin
+Pipeline Plugin
+Docker Pipeline Plugin
+Blue Ocean
+Email Extension Plugin
+Credentials Binding Plugin
+JUnit Plugin
+SonarQube Scanner Plugin
+Kubernetes Plugin
+Slack Notification Plugin
+Explain about branching, merging, and branch review strategy that you have used in Git repository?
+
+Answer:
+Branching Strategy: We use the Git Flow branching model, which includes feature branches, develop branch, and master branch.
+Merging Strategy: Feature branches are merged into the develop branch using pull requests. After thorough code reviews and passing CI tests, develop is merged into the master branch for releases.
+Branch Review Strategy: Code reviews are conducted through pull requests. At least one or two team members review the code, ensuring it meets coding standards and passes all tests before merging.
