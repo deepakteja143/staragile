@@ -1,0 +1,87 @@
+Sure, I'll provide answers to the questions from the image:
+
+Do you have created two Kubernetes clusters, what are the resources that you have used to create a cluster?
+
+Answer: Yes, I have created multiple Kubernetes clusters. To create a cluster, I used resources such as:
+Control Plane (Master Nodes): Components like kube-apiserver, etcd, kube-scheduler, kube-controller-manager.
+Worker Nodes: kubelet, kube-proxy, container runtime (Docker, containerd).
+Networking: CNI (Container Network Interface) plugins such as Calico, Flannel.
+Storage: Persistent volumes, dynamic provisioning with storage classes.
+Load Balancers: For exposing services (e.g., AWS ELB, GCP Load Balancer).
+IAM and Security Groups: For controlling access and permissions.
+Monitoring and Logging: Prometheus, Grafana, Fluentd, EFK stack.
+Have you created VPC? How to decide how many subnets we have to use? How many public and private subnets you have been created? How many subnets you have created?
+
+Answer: Yes, I have created VPCs. The decision on how many subnets to use depends on the application's requirements and high availability needs. Typically, I create:
+Public Subnets: For resources that need direct internet access (e.g., Load Balancers, Bastion Hosts).
+Private Subnets: For internal resources (e.g., application servers, databases).
+For high availability, I usually create subnets in multiple availability zones (AZs). For example, if there are three AZs, I might create three public and three private subnets, making a total of six subnets.
+How many machine (instances) you have been created? How many master nodes you have created?
+
+Answer: The number of instances and master nodes depends on the cluster's size and fault tolerance requirements. Typically:
+Small Cluster: 3 master nodes (for high availability) and 3-5 worker nodes.
+Medium Cluster: 3-5 master nodes and 10-20 worker nodes.
+Large Cluster: 5-7 master nodes and 50+ worker nodes.
+Have you backup the etcd cluster?
+
+Answer: Yes, it's crucial to back up the etcd cluster because it stores the cluster's state. I use tools like etcdctl for taking regular snapshots and storing them in a secure, redundant location.
+Which network you have been used for Kubernetes?
+
+Answer: I have used various networking solutions depending on the requirements:
+Calico: For its network policies and security features.
+Flannel: For simplicity in small to medium-sized clusters.
+Weave: For its simplicity and fast setup.
+AWS VPC CNI: For AWS EKS clusters to integrate seamlessly with VPC.
+How pods are communicating with each other? So, which network you have been used?
+
+Answer: Pods communicate with each other using the Kubernetes network model, which requires all Pods to be able to communicate with each other without NAT. This is achieved using CNI plugins like Calico, Flannel, or Weave. These plugins manage the network setup and IP address allocation for Pods.
+Have you worked on blue-green deployment strategy?
+
+Answer: Yes, I have worked on blue-green deployments. This strategy involves running two identical production environments (Blue and Green). The Blue environment is live, and the Green environment is the new version. After deploying and testing the new version in the Green environment, traffic is switched from Blue to Green.
+How to login into the Kubernetes?
+
+Answer: To login to Kubernetes, I use kubectl, the command-line tool for Kubernetes. Authentication is typically done using kubeconfig files, tokens, or cloud provider IAM roles. The basic command is:
+arduino
+Copy code
+kubectl config use-context <context-name>
+kubectl get nodes
+How can you connect VPN?
+
+Answer: To connect to a VPN, I use tools like OpenVPN, WireGuard, or cloud provider VPN solutions. The steps usually involve:
+Installing the VPN client software.
+Importing the VPN configuration file (.ovpn for OpenVPN).
+Authenticating using credentials or certificates.
+Starting the VPN connection.
+How to execute the kubectl command in your local network?
+
+Answer: To execute kubectl commands in my local network, I need to ensure that:
+My kubeconfig file is configured correctly with the cluster's API server endpoint.
+I have network connectivity to the Kubernetes API server (using VPN if necessary).
+I use kubectl commands as usual:
+sql
+Copy code
+kubectl get pods
+kubectl describe pod <pod-name>
+What is the default port number of etcd?
+
+Answer: The default port number for etcd is 2379 for client communication and 2380 for peer communication.
+How to increase Kubernetes version(s) upgrades?
+
+Answer: To upgrade Kubernetes versions, follow these steps:
+Backup etcd: Ensure you have a backup of the etcd database.
+Upgrade Control Plane: Upgrade the master nodes one at a time.
+Upgrade Worker Nodes: Upgrade the kubelet and kubectl on worker nodes.
+Verify Compatibility: Check that all add-ons and custom resources are compatible with the new version.
+Use tools like kubeadm, managed Kubernetes services (EKS, GKE, AKS) provide automated upgrade procedures.
+In Linux what is the difference between web server and app server?
+
+Answer:
+Web Server: Handles HTTP requests and serves static content (e.g., HTML, CSS, JavaScript). Examples include Apache HTTP Server and Nginx.
+Application Server: Provides business logic and application services. It can handle dynamic content and support various protocols (e.g., HTTP, WebSocket). Examples include Apache Tomcat, JBoss, and WebSphere.
+Let me know if you need any more details or further assistance with any specific question.
+
+
+
+
+
+
