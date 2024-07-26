@@ -1,0 +1,146 @@
+Sure, I'll provide answers to the questions from the image:
+
+5G overall functioning in AWS?
+
+Answer: AWS provides infrastructure to support 5G networks through services like AWS Wavelength and AWS Outposts. These services bring AWS compute and storage to the edge of the 5G network, allowing for ultra-low latency applications. AWS Wavelength embeds AWS infrastructure within telecommunications providers' 5G networks, enabling developers to deploy applications closer to end-users.
+Autoscaling in AWS?
+
+Answer: AWS Auto Scaling helps maintain application availability and allows you to automatically add or remove EC2 instances based on the demand. You can define scaling policies that adjust the capacity of your fleet based on metrics such as CPU utilization, memory usage, or custom CloudWatch metrics.
+How to check the particular pod on Kubernetes?
+
+Answer: To check a particular pod in Kubernetes, you can use the kubectl command:
+php
+Copy code
+kubectl get pod <pod-name>
+kubectl describe pod <pod-name>
+kubectl logs <pod-name> [-c <container-name>]
+Explain about Declarative pipeline and Scripted pipeline? And difference.
+
+Answer:
+Declarative Pipeline: Uses a predefined syntax to define the pipeline structure. It's easier to read and maintain.
+groovy
+Copy code
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building..'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying..'
+            }
+        }
+    }
+}
+Scripted Pipeline: Uses Groovy scripting to define the pipeline. It offers more flexibility but can be complex.
+groovy
+Copy code
+node {
+    stage('Build') {
+        echo 'Building..'
+    }
+    stage('Test') {
+        echo 'Testing..'
+    }
+    stage('Deploy') {
+        echo 'Deploying..'
+    }
+}
+Difference: Declarative pipeline has a predefined structure, making it simpler and less prone to errors, while the scripted pipeline provides more flexibility but requires a deeper understanding of Groovy syntax.
+etcd?
+
+Answer: etcd is a distributed key-value store that provides a reliable way to store data across a cluster of machines. It is used in Kubernetes to store all cluster data and configurations, ensuring consistency and reliability of the cluster state.
+Controllers manager functioning?
+
+Answer: The Kubernetes controller manager is a daemon that embeds the core control loops (controllers) shipped with Kubernetes. It manages controllers like the replication controller, endpoints controller, namespace controller, and service accounts controller. These controllers ensure the desired state of the cluster is maintained.
+Does controllers will scaleup & scale down the pods?
+
+Answer: Yes, controllers like the Deployment controller, StatefulSet controller, and Horizontal Pod Autoscaler can scale up and scale down the number of pods based on the defined specifications and metrics.
+What is namespace?
+
+Answer: A namespace in Kubernetes is a virtual cluster within a physical cluster. It helps organize and divide cluster resources between multiple users or teams. Namespaces provide a scope for names, allowing for resource isolation and management.
+What is Clustersip in K8 and Np/npport?
+
+Answer:
+ClusterIP: A type of Kubernetes Service that exposes the service on a cluster-internal IP. It is only accessible within the cluster.
+NodePort: A type of Kubernetes Service that exposes the service on each Node's IP at a static port. It allows external traffic to access the service.
+Cost services (Billing) in AWS?
+
+Answer: AWS provides several cost management services such as AWS Cost Explorer, AWS Budgets, and AWS Cost and Usage Report. These services help monitor, track, and forecast costs, set budget thresholds, and receive alerts.
+Stateful and Stateless (sets)?
+
+Answer:
+Stateful: Applications that maintain state information across sessions and requests. Kubernetes uses StatefulSets to manage stateful applications, ensuring stable network identity and persistent storage.
+Stateless: Applications that do not retain session information. Each request is independent, and any instance of the application can handle it. Deployments in Kubernetes are typically used for stateless applications.
+DevOps?
+
+Answer: DevOps is a set of practices that combines software development (Dev) and IT operations (Ops). The goal is to shorten the development lifecycle and deliver high-quality software continuously through automation, collaboration, and integration.
+CI/CD pipeline?
+
+Answer: A CI/CD pipeline automates the process of software development, integration, testing, and deployment. Continuous Integration (CI) involves automatically building and testing code changes, while Continuous Deployment (CD) involves automatically deploying the changes to production.
+Kubernetes (pod, deployment)?
+
+Answer:
+Pod: The smallest deployable unit in Kubernetes, which can contain one or more containers.
+Deployment: A higher-level abstraction that manages a set of identical pods, providing declarative updates and ensuring the desired number of replicas are running.
+Docker (file, image conversion to container)?
+
+Answer:
+Dockerfile: A text file with instructions to build a Docker image.
+Image: A read-only template that contains the application and its dependencies.
+Container: A runtime instance of a Docker image, running as an isolated process.
+Kubernetes architecture?
+
+Answer: Kubernetes architecture consists of the following components:
+Master Node: Manages the cluster, including the API server, scheduler, controller manager, and etcd.
+Worker Nodes: Run the application workloads and contain kubelet, kube-proxy, and container runtime.
+Jenkins (master & slave architecture)?
+
+Answer: Jenkins uses a master-slave architecture to manage distributed builds. The master coordinates the build process and delegates tasks to slave nodes (agents) that perform the actual build steps.
+ALB (Load Balancer & Autoscaling)?
+
+Answer:
+ALB (Application Load Balancer): Distributes incoming application traffic across multiple targets, such as EC2 instances.
+Autoscaling: Automatically adjusts the number of EC2 instances in a group based on the current demand to ensure performance and cost-efficiency.
+How DevOps is different from Agile methodology?
+
+Answer: Agile focuses on iterative development, frequent delivery, and collaboration between developers and customers. DevOps extends Agile principles by emphasizing collaboration between development and operations teams, automating the software delivery process, and ensuring continuous integration and continuous deployment (CI/CD).
+What are different phases in DevOps?
+
+Answer: The different phases in DevOps include:
+Plan: Planning the development and release process.
+Code: Writing and managing the source code.
+Build: Compiling and packaging the code.
+Test: Automated testing to ensure code quality.
+Release: Deploying the application to production.
+Deploy: Rolling out the application to the end-users.
+Operate: Managing and monitoring the application in production.
+Monitor: Continuous monitoring and feedback to improve the system.
+What is Blue/Green Deployment pattern?
+
+Answer: Blue/Green Deployment is a strategy for minimizing downtime and reducing risk during deployments. Two identical environments (Blue and Green) are maintained. Blue is the live environment, and Green is the new version. Traffic is switched to Green after successful testing, ensuring a smooth transition with no downtime.
+
+2/2
+
+that iss s3 overall functioning in aws not 5g
+ChatGPT
+My apologies for the confusion. Let's address the question regarding S3 overall functioning in AWS:
+
+S3 overall functioning in AWS?
+Answer: Amazon S3 (Simple Storage Service) is an object storage service that offers industry-leading scalability, data availability, security, and performance. It allows you to store and retrieve any amount of data from anywhere on the web. Key features include:
+Scalability: Automatically scales to handle large amounts of data.
+Durability and Availability: Designed for 99.999999999% (11 9's) durability and 99.99% availability of objects.
+Security: Offers various security features like access control policies, bucket policies, encryption, and integration with AWS Identity and Access Management (IAM).
+Storage Classes: Provides different storage classes for different use cases, such as S3 Standard for frequently accessed data and S3 Glacier for archival storage.
+Versioning: Keeps multiple versions of an object, enabling you to recover from accidental deletions and overwrites.
+Lifecycle Policies: Automates the transition of objects to different storage classes and the expiration of objects.
+Data Transfer: Supports data transfer with features like S3 Transfer Acceleration, which speeds up uploads over long distances, and AWS Snowball for large-scale data transfers.
+Event Notifications: Enables setting up event notifications to trigger workflows or alerts based on specific actions, such as object creation or deletion.
